@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mapbox/unitbezier.svg)](https://travis-ci.org/mapbox/unitbezier)
+
 # unitbezier
 
 Unit bezier interpolation function: a port to JavaScript from Webkit:
