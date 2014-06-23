@@ -4,7 +4,8 @@
   "description": "unit bezier curve interpolation",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/*.js",
+    "cov": "istanbul cover test/*.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/mapbox/unitbezier",
   "devDependencies": {
-    "tap": "~0.4.8"
+    "tap": "~0.4.8",
+    "istanbul": "~0.2.11"
   }
 }
