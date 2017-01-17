@@ -1,11 +1,10 @@
 {
-  "name": "unitbezier",
+  "name": "@mapbox/unitbezier",
   "version": "0.0.0",
   "description": "unit bezier curve interpolation",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js",
-    "cov": "istanbul cover test/*.js"
+    "test": "tap --coverage test/*.js"
   },
   "repository": {
     "type": "git",
@@ -18,13 +17,18 @@
     "webkit"
   ],
   "author": "",
-  "license": "BSD",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/mapbox/unitbezier/issues"
   },
   "homepage": "https://github.com/mapbox/unitbezier",
   "devDependencies": {
-    "tap": "~0.4.8",
-    "istanbul": "~0.2.11"
+    "cz-conventional-changelog": "1.2.0",
+    "tap": "~9.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
