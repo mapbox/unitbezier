@@ -24,15 +24,9 @@
   },
   "homepage": "https://github.com/mapbox/unitbezier",
   "devDependencies": {
-    "cz-conventional-changelog": "1.2.0",
     "eslint": "^4.6.1",
     "eslint-config-mourner": "^2.0.3",
     "tap": "~9.0.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "eslintConfig": {
     "extends": "mourner"
