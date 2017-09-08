@@ -12,12 +12,6 @@ http://svn.webkit.org/repository/webkit/trunk/Source/WebCore/platform/graphics/U
 
 Initialize a new bezier curve given the points
 
-### bezier.sampleCurveX(t)
-
-### bezier.sampleCurveY(t)
-
-### bezier.sampleCurveDerivativeX(t)
-
-### bezier.solveCurveX(t)
-
 ### bezier.solve(x, epsilon)
+
+Evaluate bezier for value `x` (ranging from 0 to 1) with `epsilon` precision (1e-6 by default).
