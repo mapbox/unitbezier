@@ -30,44 +30,41 @@ UnitBezier.prototype = {
     solveCurveX: function(x, epsilon) {
         if (epsilon === undefined) epsilon = 1e-6;
 
-        var t0, t1, t2, x2, i;
+        if (x < 0.0) return 0.0;
+        if (x > 1.0) return 1.0;
 
-        // First try a few iterations of Newton's method -- normally very fast.
-        for (t2 = x, i = 0; i < 8; i++) {
+        var t = x;
 
-            x2 = this.sampleCurveX(t2) - x;
-            if (Math.abs(x2) < epsilon) return t2;
+        // First try a few iterations of Newton's method - normally very fast.
+        for (var i = 0; i < 8; i++) {
+            var x2 = this.sampleCurveX(t) - x;
+            if (Math.abs(x2) < epsilon) return t;
 
-            var d2 = this.sampleCurveDerivativeX(t2);
+            var d2 = this.sampleCurveDerivativeX(t);
             if (Math.abs(d2) < 1e-6) break;
 
-            t2 = t2 - x2 / d2;
+            t = t - x2 / d2;
         }
 
         // Fall back to the bisection method for reliability.
-        t0 = 0.0;
-        t1 = 1.0;
-        t2 = x;
+        var t0 = 0.0;
+        var t1 = 1.0;
+        t = x;
 
-        if (t2 < t0) return t0;
-        if (t2 > t1) return t1;
-
-        while (t0 < t1) {
-
-            x2 = this.sampleCurveX(t2);
-            if (Math.abs(x2 - x) < epsilon) return t2;
+        for (i = 0; i < 20; i++) {
+            x2 = this.sampleCurveX(t);
+            if (Math.abs(x2 - x) < epsilon) break;
 
             if (x > x2) {
-                t0 = t2;
+                t0 = t;
             } else {
-                t1 = t2;
+                t1 = t;
             }
 
-            t2 = (t1 - t0) * 0.5 + t0;
+            t = (t1 - t0) * 0.5 + t0;
         }
 
-        // Failure.
-        return t2;
+        return t;
     },
 
     solve: function(x, epsilon) {
