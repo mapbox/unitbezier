@@ -14,20 +14,20 @@ function UnitBezier(p1x, p1y, p2x, p2y) {
 }
 
 UnitBezier.prototype = {
-    sampleCurveX: function(t) {
+    sampleCurveX: function (t) {
         // `ax t^3 + bx t^2 + cx t' expanded using Horner's rule.
         return ((this.ax * t + this.bx) * t + this.cx) * t;
     },
 
-    sampleCurveY: function(t) {
+    sampleCurveY: function (t) {
         return ((this.ay * t + this.by) * t + this.cy) * t;
     },
 
-    sampleCurveDerivativeX: function(t) {
+    sampleCurveDerivativeX: function (t) {
         return (3.0 * this.ax * t + 2.0 * this.bx) * t + this.cx;
     },
 
-    solveCurveX: function(x, epsilon) {
+    solveCurveX: function (x, epsilon) {
         if (epsilon === undefined) epsilon = 1e-6;
 
         if (x < 0.0) return 0.0;
@@ -67,7 +67,7 @@ UnitBezier.prototype = {
         return t;
     },
 
-    solve: function(x, epsilon) {
+    solve: function (x, epsilon) {
         return this.sampleCurveY(this.solveCurveX(x, epsilon));
     }
 };
