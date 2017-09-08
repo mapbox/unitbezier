@@ -11,6 +11,11 @@ function UnitBezier(p1x, p1y, p2x, p2y) {
     this.cy = 3.0 * p1y;
     this.by = 3.0 * (p2y - p1y) - this.cy;
     this.ay = 1.0 - this.cy - this.by;
+
+    this.p1x = p1x;
+    this.p1y = p1y;
+    this.p2x = p2x;
+    this.p2y = p2y;
 }
 
 UnitBezier.prototype = {
