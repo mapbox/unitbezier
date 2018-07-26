@@ -1,0 +1,16 @@
+Error ------------------------------------------------------------------------------------ test/flow.input.js.flow:15:13
+
+Cannot call `UnitBezier` because function [1] requires another argument.
+
+   test/flow.input.js.flow:15:13
+   15| const ub2 = new UnitBezier();
+                   ^^^^^^^^^^^^^^^^
+
+References:
+   index.js.flow:5:5
+    5|     constructor(p1x: number, p1y: number, p2x: number, p2y: number): UnitBezier;
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ [1]
+
+
+
+Found 1 error

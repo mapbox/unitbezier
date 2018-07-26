@@ -1,0 +1,15 @@
+// @flow strict
+/* eslint-disable */
+
+const UnitBezier = require('..');
+
+// Success:
+const ub = new UnitBezier(1, 2, 3, 4);
+const r1: number = ub.sampleCurveX(1);
+const r2: number = ub.sampleCurveY(1);
+const r3: number = ub.sampleCurveDerivativeX(1);
+const r4: number = ub.solveCurveX(1, 0.01);
+const r5: number = ub.solve(1, 0.01);
+
+// Type errors:
+const ub2 = new UnitBezier();
