@@ -26,6 +26,7 @@
   "devDependencies": {
     "eslint": "^4.6.1",
     "eslint-config-mourner": "^2.0.3",
+    "flow-bin": "^0.77.0",
     "tap": "~9.0.3"
   },
   "eslintConfig": {
