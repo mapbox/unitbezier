@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "unit bezier curve interpolation",
   "main": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "pretest": "eslint index.js test/*.js",
     "test": "tap --coverage test/*.js"
