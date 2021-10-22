@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/unitbezier",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "unit bezier curve interpolation",
   "main": "index.js",
   "typings": "index.d.ts",
