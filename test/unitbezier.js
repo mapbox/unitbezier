@@ -1,6 +1,6 @@
 'use strict';
 
-var test = require('tap').test,
+var test = require('tape').test,
     UnitBezier = require('../');
 
 test('unit bezier', function (t) {

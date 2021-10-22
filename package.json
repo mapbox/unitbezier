@@ -6,8 +6,12 @@
   "typings": "index.d.ts",
   "scripts": {
     "pretest": "eslint index.js test/*.js",
-    "test": "tap --coverage test/*.js"
+    "test": "node test/unitbezier.js"
   },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:mapbox/unitbezier.git"
@@ -25,9 +29,9 @@
   },
   "homepage": "https://github.com/mapbox/unitbezier",
   "devDependencies": {
-    "eslint": "^4.6.1",
+    "eslint": "^8.0.1",
     "eslint-config-mourner": "^2.0.3",
-    "tap": "~9.0.3"
+    "tape": "^5.3.1"
   },
   "eslintConfig": {
     "extends": "mourner"
