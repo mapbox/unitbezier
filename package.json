@@ -1,12 +1,14 @@
 {
   "name": "@mapbox/unitbezier",
+  "type": "module",
   "version": "0.0.1",
   "description": "unit bezier curve interpolation",
   "main": "index.js",
-  "typings": "index.d.ts",
+  "exports": "./index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "pretest": "eslint index.js test/*.js",
-    "test": "node test/unitbezier.js"
+    "pretest": "eslint *.js",
+    "test": "node --test test.js"
   },
   "files": [
     "index.js",
@@ -29,11 +31,7 @@
   },
   "homepage": "https://github.com/mapbox/unitbezier",
   "devDependencies": {
-    "eslint": "^8.0.1",
-    "eslint-config-mourner": "^2.0.3",
-    "tape": "^5.3.1"
-  },
-  "eslintConfig": {
-    "extends": "mourner"
+    "eslint": "^10.4.0",
+    "eslint-config-mourner": "^4.1.0"
   }
 }
