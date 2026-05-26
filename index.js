@@ -2,72 +2,49 @@
 export default class UnitBezier {
     constructor(p1x, p1y, p2x, p2y) {
         // Calculate the polynomial coefficients, implicit first and last control points are (0,0) and (1,1).
-        this.cx = 3.0 * p1x;
-        this.bx = 3.0 * (p2x - p1x) - this.cx;
-        this.ax = 1.0 - this.cx - this.bx;
+        this.cx = 3 * p1x;
+        this.bx = 3 * (p2x - p1x) - this.cx;
+        this.ax = 1 - this.cx - this.bx;
 
-        this.cy = 3.0 * p1y;
-        this.by = 3.0 * (p2y - p1y) - this.cy;
-        this.ay = 1.0 - this.cy - this.by;
-
-        this.p1x = p1x;
-        this.p1y = p1y;
-        this.p2x = p2x;
-        this.p2y = p2y;
+        this.cy = 3 * p1y;
+        this.by = 3 * (p2y - p1y) - this.cy;
+        this.ay = 1 - this.cy - this.by;
     }
 
-    sampleCurveX(t) {
-        // `ax t^3 + bx t^2 + cx t' expanded using Horner's rule.
-        return ((this.ax * t + this.bx) * t + this.cx) * t;
-    }
+    solve(x, epsilon = 1e-6) {
+        if (x <= 0) return 0;
+        if (x >= 1) return 1;
 
-    sampleCurveY(t) {
-        return ((this.ay * t + this.by) * t + this.cy) * t;
-    }
-
-    sampleCurveDerivativeX(t) {
-        return (3.0 * this.ax * t + 2.0 * this.bx) * t + this.cx;
-    }
-
-    solveCurveX(x, epsilon) {
-        if (epsilon === undefined) epsilon = 1e-6;
-
-        if (x < 0.0) return 0.0;
-        if (x > 1.0) return 1.0;
+        const {ax, bx, cx, ay, by, cy} = this;
+        let t = x;
 
         // First try a few iterations of Newton's method - normally very fast.
-        for (let i = 0, t = x; i < 8; i++) {
-            const x2 = this.sampleCurveX(t) - x;
-            if (Math.abs(x2) < epsilon) return t;
+        // `ax t^3 + bx t^2 + cx t` expanded using Horner's rule.
+        for (let i = 0; i < 8; i++) {
+            const x2 = ((ax * t + bx) * t + cx) * t - x;
+            if (Math.abs(x2) < epsilon) return ((ay * t + by) * t + cy) * t;
 
-            const d2 = this.sampleCurveDerivativeX(t);
+            const d2 = (3 * ax * t + 2 * bx) * t + cx;
             if (Math.abs(d2) < 1e-6) break;
 
-            t = t - x2 / d2;
+            t -= x2 / d2;
         }
 
         // Fall back to the bisection method for reliability.
-        let t0 = 0.0;
-        let t1 = 1.0;
-        let t = x;
+        let t0 = 0;
+        let t1 = 1;
+        t = x;
 
         for (let i = 0; i < 20; i++) {
-            const x2 = this.sampleCurveX(t);
+            const x2 = ((ax * t + bx) * t + cx) * t;
             if (Math.abs(x2 - x) < epsilon) break;
 
-            if (x > x2) {
-                t0 = t;
-            } else {
-                t1 = t;
-            }
+            if (x > x2) t0 = t;
+            else t1 = t;
 
-            t = (t1 - t0) * 0.5 + t0;
+            t = (t0 + t1) * 0.5;
         }
 
-        return t;
-    }
-
-    solve(x, epsilon) {
-        return this.sampleCurveY(this.solveCurveX(x, epsilon));
+        return ((ay * t + by) * t + cy) * t;
     }
 }
