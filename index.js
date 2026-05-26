@@ -1,21 +1,18 @@
 
-export default class UnitBezier {
-    constructor(p1x, p1y, p2x, p2y) {
-        // Calculate the polynomial coefficients, implicit first and last control points are (0,0) and (1,1).
-        this.cx = 3 * p1x;
-        this.bx = 3 * (p2x - p1x) - this.cx;
-        this.ax = 1 - this.cx - this.bx;
+export default function unitBezier(p1x, p1y, p2x, p2y) {
+    // Calculate the polynomial coefficients, implicit first and last control points are (0,0) and (1,1).
+    const cx = 3 * p1x;
+    const bx = 3 * (p2x - p1x) - cx;
+    const ax = 1 - cx - bx;
 
-        this.cy = 3 * p1y;
-        this.by = 3 * (p2y - p1y) - this.cy;
-        this.ay = 1 - this.cy - this.by;
-    }
+    const cy = 3 * p1y;
+    const by = 3 * (p2y - p1y) - cy;
+    const ay = 1 - cy - by;
 
-    solve(x, epsilon = 1e-6) {
+    return function solve(x, epsilon = 1e-6) {
         if (x <= 0) return 0;
         if (x >= 1) return 1;
 
-        const {ax, bx, cx, ay, by, cy} = this;
         let t = x;
 
         // First try a few iterations of Newton's method - normally very fast.
@@ -46,5 +43,5 @@ export default class UnitBezier {
         }
 
         return ((ay * t + by) * t + cy) * t;
-    }
+    };
 }
